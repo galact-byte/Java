@@ -1,9 +1,8 @@
 package com.Services;
 
-import com.user.Employee;
+import com.bean.Employee;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class EmployeeManager {
     private ArrayList<Employee> employeeList;

@@ -1,4 +1,4 @@
-package com.user;
+package com.bean;
 
 public class Employee {
     private String id;

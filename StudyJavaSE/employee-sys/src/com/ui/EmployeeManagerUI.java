@@ -8,33 +8,29 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class EmployeeManagerUI {
+public class EmployeeManagerUI extends JFrame {
     private JFrame frame;
     private JTable table;
     private DefaultTableModel model;
-    private JTextField textFieldSearch;
-
-    public static void main(String[] args) {
-        EmployeeManagerUI window = new EmployeeManagerUI();
-        window.frame.setVisible(true);
-    }
+    private JTextField nametextFieldSearch;
 
     public EmployeeManagerUI() {
+        frame=this;
         initialize();
+        this.setVisible(true);
     }
 
     private void initialize() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 800, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new BorderLayout());
+        this.setBounds(100, 100, 800, 600);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        textFieldSearch = new JTextField(20);
+        nametextFieldSearch = new JTextField(20);
         JButton btnSearch = new JButton("搜索");
         JButton btnAdd = new JButton("添加");
-        topPanel.add(textFieldSearch);
+        topPanel.add(nametextFieldSearch);
         topPanel.add(btnSearch);
         topPanel.add(btnAdd);
 
@@ -97,7 +93,7 @@ public class EmployeeManagerUI {
         btnSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String searchText = textFieldSearch.getText();
+                String searchText = nametextFieldSearch.getText();
                 // 进行搜索逻辑处理
             }
         });

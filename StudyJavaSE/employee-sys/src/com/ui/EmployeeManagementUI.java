@@ -1,8 +1,7 @@
 package com.ui;
 
 import com.Services.EmployeeManager;
-import com.user.Department;
-import com.user.Employee;
+import com.bean.Employee;
 
 import javax.swing.*;
 import java.awt.*;
