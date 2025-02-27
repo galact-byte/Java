@@ -9,13 +9,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class EmployeeManagerUI extends JFrame {
-    private JFrame frame;
     private JTable table;
     private DefaultTableModel model;
     private JTextField nametextFieldSearch;
 
     public EmployeeManagerUI() {
-        frame=this;
         initialize();
         this.setVisible(true);
     }
@@ -74,7 +72,7 @@ public class EmployeeManagerUI extends JFrame {
                 if (selectedRow >= 0) {
                     int id = (Integer)model.getValueAt(selectedRow, 0);
 //                    System.out.println("编辑ID:"+id);
-                    JOptionPane.showMessageDialog(frame, "编辑ID:"+id);
+                    JOptionPane.showMessageDialog(EmployeeManagerUI.this, "编辑ID:"+id);
                 }
             }
         });
@@ -85,7 +83,7 @@ public class EmployeeManagerUI extends JFrame {
                 if (selectedRow >= 0) {
                     int id = (Integer)model.getValueAt(selectedRow, 0);
 //                    System.out.println("删除ID:"+id);
-                    JOptionPane.showMessageDialog(frame, "删除ID:"+id);
+                    JOptionPane.showMessageDialog(EmployeeManagerUI.this, "删除ID:"+id);
                 }
             }
         });
@@ -106,7 +104,7 @@ public class EmployeeManagerUI extends JFrame {
             }
         });
 
-        frame.getContentPane().add(topPanel, BorderLayout.NORTH);
-        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+        this.getContentPane().add(topPanel, BorderLayout.NORTH);
+        this.getContentPane().add(scrollPane, BorderLayout.CENTER);
     }
 }

@@ -1,25 +1,15 @@
 package com.bean;
 
-public class Login_User {
-    private String username;
+public class Login_User { ;
     private String password;
     private String loginName;
 
     public Login_User() {
     }
 
-    public Login_User(String username, String password, String loginName) {
-        this.username = username;
-        this.password = password;
+    public Login_User(String loginName, String password) {
         this.loginName = loginName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+        this.password = password;
     }
 
     public String getPassword() {
@@ -41,9 +31,8 @@ public class Login_User {
     @Override
     public String toString() {
         return "Login_User{" +
-                "username='" + username + '\'' +
+                "loginName='" + loginName + '\'' +
                 ", password='" + password + '\'' +
-                ", loginName='" + loginName + '\'' +
                 '}';
     }
 }
