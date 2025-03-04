@@ -1,5 +1,7 @@
 package com.ui;
 
+import com.bean.Employee;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -7,13 +9,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class EmployeeManagerUI extends JFrame {
     private JTable table;
     private DefaultTableModel model;
     private JTextField nametextFieldSearch;
+    private static ArrayList<Employee> employees = new ArrayList<>();
 
     public EmployeeManagerUI() {
+    }
+    public EmployeeManagerUI(String userName) {
+        super("欢迎"+userName+"进入员工管理界面");
         initialize();
         this.setVisible(true);
     }
@@ -99,7 +106,7 @@ public class EmployeeManagerUI extends JFrame {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                
 
             }
         });

@@ -166,7 +166,7 @@ public class LoginUI extends JFrame implements ActionListener {
         if (user != null) {
             if (user.getPassword().equals(password)) {
                 System.out.println("登录成功");
-                new EmployeeManagerUI();
+                new EmployeeManagerUI(user.getLoginName());
                 this.dispose(); // 关闭当前窗口
             } else {
                 JOptionPane.showMessageDialog(this, "密码错误");
