@@ -106,8 +106,7 @@ public class EmployeeManagerUI extends JFrame {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-
+                new AddEmployeeUI();
             }
         });
 
