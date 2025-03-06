@@ -1,16 +1,22 @@
 package com.ui;
 
+import com.bean.Employee;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
 public class AddEmployeeUI extends JFrame {
     private JTextField txtId, txtName, txtSex, txtAge, txtPhone, txtJob, txtEntryTime, txtSalary, txtDepartment;
     private JFormattedTextField txtHireDate;
     private JButton btnSave, btnCancel;
+    private EmployeeManagerUI parent;
 
-    public  AddEmployeeUI() {
+    public AddEmployeeUI(EmployeeManagerUI parent) {
         super("添加员工信息");
+        this.parent = parent;
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -26,7 +32,7 @@ public class AddEmployeeUI extends JFrame {
         add(lblId, gbc);
 
         gbc.gridx = 1;
-        gbc.anchor= GridBagConstraints.WEST;
+        gbc.anchor = GridBagConstraints.WEST;
         txtId = new JTextField(10);
         add(txtId, gbc);
 
@@ -124,7 +130,29 @@ public class AddEmployeeUI extends JFrame {
         btnPanel.add(btnCancel);
         add(btnPanel, gbc);
 
+        btnSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Employee emp = new Employee();
+                emp.setId(txtId.getText());
+                emp.setName(txtName.getText());
+                emp.setGender(txtSex.getText());
+                emp.setAge(Integer.parseInt(txtAge.getText()));
+                emp.setPhone(txtPhone.getText());
+                emp.setJob(txtJob.getText());
+                emp.setEntryTime(txtEntryTime.getText());
+                emp.setSalary(Double.parseDouble(txtSalary.getText()));
+                emp.setDepartment(txtDepartment.getText());
+
+                parent.addEmployee(emp);
+                JOptionPane.showMessageDialog(AddEmployeeUI.this, "添加成功!");
+                AddEmployeeUI.this.dispose();
+
+            }
+        });
+
         pack();
+        setSize(300, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);

@@ -51,9 +51,9 @@ public class EmployeeManagerUI extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
         table.setRowHeight(30);
 
-        for (int i = 0; i < 20; i++) {
-            model.addRow(new Object[]{i + 1, "姓名" + (i + 1), "性别" + (i + 1), "年龄" + (i + 1), "电话" + (i + 1), "职位" + (i + 1), "入职时间" + (i + 1), "工资" + (i + 1), "部门" + (i + 1)});
-        }
+//        for (int i = 0; i < 20; i++) {
+//            model.addRow(new Object[]{i + 1, "姓名" + (i + 1), "性别" + (i + 1), "年龄" + (i + 1), "电话" + (i + 1), "职位" + (i + 1), "入职时间" + (i + 1), "工资" + (i + 1), "部门" + (i + 1)});
+//        }
 
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItemEdit = new JMenuItem("编辑");
@@ -106,11 +106,16 @@ public class EmployeeManagerUI extends JFrame {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddEmployeeUI();
+                new AddEmployeeUI(EmployeeManagerUI.this);
             }
         });
 
         this.getContentPane().add(topPanel, BorderLayout.NORTH);
         this.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    }
+
+    public void addEmployee(Employee emp) {
+        employees.add(emp);
+        model.addRow(new Object[]{emp.getId(), emp.getName(), emp.getGender(), emp.getAge(), emp.getPhone(), emp.getJob(), emp.getEntryTime(), emp.getSalary(), emp.getDepartment()});
     }
 }
