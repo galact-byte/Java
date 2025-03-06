@@ -55,6 +55,7 @@ public class EmployeeManagerUI extends JFrame {
 //            model.addRow(new Object[]{i + 1, "姓名" + (i + 1), "性别" + (i + 1), "年龄" + (i + 1), "电话" + (i + 1), "职位" + (i + 1), "入职时间" + (i + 1), "工资" + (i + 1), "部门" + (i + 1)});
 //        }
 
+        // 右键菜单
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItemEdit = new JMenuItem("编辑");
         JMenuItem menuItemDelete = new JMenuItem("删除");
@@ -90,7 +91,9 @@ public class EmployeeManagerUI extends JFrame {
                 if (selectedRow >= 0) {
                     int id = (Integer)model.getValueAt(selectedRow, 0);
 //                    System.out.println("删除ID:"+id);
-                    JOptionPane.showMessageDialog(EmployeeManagerUI.this, "删除ID:"+id);
+//                    JOptionPane.showMessageDialog(EmployeeManagerUI.this, "删除ID:"+id);
+                    deleteEmployee(id);
+                    model.removeRow(selectedRow);
                 }
             }
         });
@@ -112,6 +115,15 @@ public class EmployeeManagerUI extends JFrame {
 
         this.getContentPane().add(topPanel, BorderLayout.NORTH);
         this.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void deleteEmployee(int id){
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getId()==id) {
+                employees.remove(i);
+                break;
+            }
+        }
     }
 
     public void addEmployee(Employee emp) {

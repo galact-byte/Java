@@ -123,7 +123,7 @@ public class EmployeeManagementUI {
 
     private void addEmployee() {
         try {
-            String id = idField.getText();
+            int id = Integer.parseInt(idField.getText());
             String name = nameField.getText();
             String gender = genderField.getText();
             int age = Integer.parseInt(ageField.getText());
@@ -145,7 +145,7 @@ public class EmployeeManagementUI {
     private void deleteEmployee() {
         String id = JOptionPane.showInputDialog(frame, "请输入要删除的员工ID:");
         if (id != null && !id.isEmpty()) {
-            boolean success = employeeManager.deleteEmployee(id);
+            boolean success = employeeManager.deleteEmployee(Integer.parseInt(id));
             if (success) {
                 JOptionPane.showMessageDialog(frame, "删除成功");
                 displayEmployeeList();
@@ -157,10 +157,10 @@ public class EmployeeManagementUI {
     private void updateEmployee() {
         String id = JOptionPane.showInputDialog(frame, "请输入要更新的员工ID:");
         if (id != null && !id.isEmpty()) {
-            Employee existingEmployee = employeeManager.queryEmployee(id);
+            Employee existingEmployee = employeeManager.queryEmployee(Integer.parseInt(id));
             if (existingEmployee != null) {
                 Employee updatedEmployee = new Employee(
-                        id,
+                        Integer.parseInt(id),
                         JOptionPane.showInputDialog(frame, "请修改员工姓名", existingEmployee.getName()),
                         JOptionPane.showInputDialog(frame, "请修改员工性别", existingEmployee.getGender()),
                         Integer.parseInt(JOptionPane.showInputDialog(frame, "请修改员工年龄", existingEmployee.getAge())),
@@ -170,7 +170,7 @@ public class EmployeeManagementUI {
                         Double.parseDouble(JOptionPane.showInputDialog(frame, "请修改员工工资", existingEmployee.getSalary())),
                         JOptionPane.showInputDialog(frame, "请修改员工部门", existingEmployee.getDepartment())
                 );
-                boolean success = employeeManager.updateEmployee(id, updatedEmployee);
+                boolean success = employeeManager.updateEmployee(Integer.parseInt(id), updatedEmployee);
                 if (success) {
                     JOptionPane.showMessageDialog(frame, "员工信息修改成功");
                     displayEmployeeList();
@@ -185,7 +185,7 @@ public class EmployeeManagementUI {
     private void queryEmployee() {
         String id = JOptionPane.showInputDialog(frame, "请输入要查询的员工ID");
         if (id != null && !id.isEmpty()){
-            Employee employee = employeeManager.queryEmployee(id);
+            Employee employee = employeeManager.queryEmployee(Integer.parseInt(id));
             if (employee != null){
                 JOptionPane.showMessageDialog(frame, "员工信息:\n" + employee.toString());
             }else{

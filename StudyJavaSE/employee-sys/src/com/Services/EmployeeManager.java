@@ -12,11 +12,11 @@ public class EmployeeManager {
     public void addEmployee(Employee employee){
         employeeList.add(employee);
     }
-    public Employee queryEmployee(String id) {
+    public Employee queryEmployee(int id) {
         // 遍历员工列表，查找匹配的员工
         for (Employee employee : employeeList) {
             // 比较 String 类型的 id 是否相等
-            if (employee.getId().equals(id)) {
+            if (employee.getId()==id) {
                 return employee;  // 找到匹配的员工，返回该员工
             }
         }
@@ -26,9 +26,9 @@ public class EmployeeManager {
 
 
 
-    public boolean deleteEmployee(String id) {
+    public boolean deleteEmployee(int id) {
         for (Employee emp : employeeList) {
-            if (emp.getId().equals(id)) {
+            if (emp.getId()==id) {
                 employeeList.remove(emp);
                 return true;
             }
@@ -36,9 +36,9 @@ public class EmployeeManager {
         return false;
     }
 
-    public boolean updateEmployee(String id, Employee employee){
+    public boolean updateEmployee(int id, Employee employee){
         for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getId().equals(id)) {
+            if (employeeList.get(i).getId()==id) {
                 employeeList.set(i, employee);  // 更新员工信息
                 return true;  // 返回true表示更新成功
             }
@@ -46,9 +46,9 @@ public class EmployeeManager {
         return false;  // 如果没有找到匹配的员工，返回false
     }
 
-    private void getEmployeeById(Integer id){
+    private void getEmployeeById(int id){
         for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getId().equals(id)){
+            if (employeeList.get(i).getId()==id){
                 System.out.println(employeeList.get(i).toString());
                 break;
             }

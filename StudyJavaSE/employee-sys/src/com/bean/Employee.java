@@ -1,7 +1,7 @@
 package com.bean;
 
 public class Employee {
-    private String id;
+    private int id;
     private String name;
     private String gender;
     private int age;
@@ -14,7 +14,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String id, String name, String gender, int age, String phone, String job, String entryTime, double salary, String department) {
+    public Employee(int id, String name, String gender, int age, String phone, String job, String entryTime, double salary, String department) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -26,11 +26,11 @@ public class Employee {
         this.department = department;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

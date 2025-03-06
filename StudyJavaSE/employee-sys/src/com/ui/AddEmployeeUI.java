@@ -134,7 +134,7 @@ public class AddEmployeeUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Employee emp = new Employee();
-                emp.setId(txtId.getText());
+                emp.setId(Integer.parseInt(txtId.getText()));
                 emp.setName(txtName.getText());
                 emp.setGender(txtSex.getText());
                 emp.setAge(Integer.parseInt(txtAge.getText()));
