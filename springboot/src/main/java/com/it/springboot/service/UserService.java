@@ -27,13 +27,18 @@ public class UserService implements IUserService{
 
     @Override
     public User updateUser(UserDto user) {
-        User user1=new User();
-        BeanUtils.copyProperties(user,user1);
-        return userRepository.save(user1);
+        User existingUser=userRepository.findById(user.getId()).orElseThrow(()->{
+            throw new IllegalArgumentException("用户不存在");
+        });
+        BeanUtils.copyProperties(user,existingUser);
+        return userRepository.save(existingUser);
     }
 
     @Override
     public void deleteUser(Integer id) {
+        if(!userRepository.existsById(id)){
+            throw new IllegalArgumentException("用户不存在，无法删除");
+        }
         userRepository.deleteById(id);
     }
 }

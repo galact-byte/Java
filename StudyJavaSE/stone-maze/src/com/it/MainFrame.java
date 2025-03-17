@@ -14,6 +14,8 @@ public class MainFrame extends JFrame {
             {9, 10, 11, 12},
             {13, 14, 15, 0}
     };
+    private int row;
+    private int col;
 
     public MainFrame() {
         initFrame();
@@ -50,14 +52,39 @@ public class MainFrame extends JFrame {
     private void switchAndMove(Direction direction) {
         switch (direction) {
             case UP:
+                if (row < data.length - 1) {
+                    int temp = data[row][col];
+                    data[row][col] = data[row + 1][col];
+                    data[row + 1][col] = temp;
+                    row++;
+                }
                 break;
             case DOWN:
+                if (row > 0||row< data.length) {
+                    int temp = data[row][col];
+                    data[row][col] = data[row - 1][col];
+                    data[row - 1][col] = temp;
+                    row--;
+                }
                 break;
             case LEFT:
+                if(col< data.length-1){
+                    int temp = data[row][col];
+                    data[row][col] = data[row][col+1];
+                    data[row][col+1] = temp;
+                    col++;
+                }
                 break;
             case RIGHT:
+                if(col>0||col< data.length){
+                    int temp = data[row][col];
+                    data[row][col] = data[row][col-1];
+                    data[row][col-1] = temp;
+                    col--;
+                }
                 break;
         }
+        initImage();
 
     }
 
@@ -70,9 +97,20 @@ public class MainFrame extends JFrame {
                 data[random][random] = temp;
             }
         }
+        OUT:
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j] == 0) {
+                    row = i;
+                    col = j;
+                    break OUT;
+                }
+            }
+        }
     }
 
     private void initImage() {
+        this.getContentPane().removeAll();
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
                 JLabel label = new JLabel();
@@ -85,6 +123,8 @@ public class MainFrame extends JFrame {
         JLabel background = new JLabel(new ImageIcon(IMAGE_PATH + "background.png"));
         background.setBounds(0, 0, 450, 484);
         this.add(background);
+
+        this.repaint();
     }
 
     private void initMenu() {
