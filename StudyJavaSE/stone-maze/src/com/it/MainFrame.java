@@ -1,10 +1,17 @@
 package com.it;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+/**
+ * 一个简单的拼图游戏
+ * 有很大概率会在最后两块显示无解
+ * 逆序数为奇数时无解，逆序数就是当前数字比前面数字大的个数
+ */
 
 public class MainFrame extends JFrame {
     public static final String IMAGE_PATH = "stone-maze/src/image/";
@@ -14,8 +21,15 @@ public class MainFrame extends JFrame {
             {9, 10, 11, 12},
             {13, 14, 15, 0}
     };
+    private int[][] windata = new int[][]{
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
+    };
     private int row;
     private int col;
+    private int count;
 
     public MainFrame() {
         initFrame();
@@ -26,6 +40,7 @@ public class MainFrame extends JFrame {
         this.setVisible(true);
     }
 
+    // 初始化按键事件
     private void initKeyPressEvent() {
         this.addKeyListener(new KeyAdapter() {
             @Override
@@ -49,6 +64,7 @@ public class MainFrame extends JFrame {
         });
     }
 
+    // 移动拼图并判断是否成功
     private void switchAndMove(Direction direction) {
         switch (direction) {
             case UP:
@@ -57,6 +73,7 @@ public class MainFrame extends JFrame {
                     data[row][col] = data[row + 1][col];
                     data[row + 1][col] = temp;
                     row++;
+                    count++;
                 }
                 break;
             case DOWN:
@@ -65,6 +82,7 @@ public class MainFrame extends JFrame {
                     data[row][col] = data[row - 1][col];
                     data[row - 1][col] = temp;
                     row--;
+                    count++;
                 }
                 break;
             case LEFT:
@@ -73,6 +91,7 @@ public class MainFrame extends JFrame {
                     data[row][col] = data[row][col+1];
                     data[row][col+1] = temp;
                     col++;
+                    count++;
                 }
                 break;
             case RIGHT:
@@ -81,6 +100,7 @@ public class MainFrame extends JFrame {
                     data[row][col] = data[row][col-1];
                     data[row][col-1] = temp;
                     col--;
+                    count++;
                 }
                 break;
         }
@@ -88,6 +108,7 @@ public class MainFrame extends JFrame {
 
     }
 
+    // 初始化随机拼图
     private void initRandomArray() {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
@@ -109,8 +130,21 @@ public class MainFrame extends JFrame {
         }
     }
 
+    // 初始化拼图
     private void initImage() {
         this.getContentPane().removeAll();
+
+        // 刷新界面时可以显示步数
+        JLabel countTxt=new JLabel("步数:"+count);
+        countTxt.setBounds(20,20,100,20);
+        countTxt.setForeground(Color.white);
+        this.add(countTxt);
+
+        if(isWin()){
+            JLabel win = new JLabel(new ImageIcon(IMAGE_PATH + "win.png"));
+            win.setBounds(92, 198, 266, 88);
+            this.add(win);
+        }
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
                 JLabel label = new JLabel();
@@ -127,6 +161,18 @@ public class MainFrame extends JFrame {
         this.repaint();
     }
 
+    private boolean isWin() {
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j] != windata[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // 初始化菜单
     private void initMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("系统菜单");
@@ -134,8 +180,10 @@ public class MainFrame extends JFrame {
         restartitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainFrame.this.dispose();
-                new MainFrame();
+//                MainFrame.this.dispose();
+//                new MainFrame();
+                initRandomArray();
+                initImage();
             }
         });
         JMenuItem exitItem = new JMenuItem("退出游戏");
@@ -151,6 +199,7 @@ public class MainFrame extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
+    // 初始化窗口
     private void initFrame() {
         this.setTitle("石头迷宫");
         this.setSize(465, 575);

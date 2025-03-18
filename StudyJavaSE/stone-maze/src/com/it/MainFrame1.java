@@ -1,6 +1,7 @@
 package com.it;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -21,8 +22,15 @@ public class MainFrame1 extends JFrame {
             {9, 10, 11, 12},
             {13, 14, 15, 0}
     };
+    private int[][] windata = new int[][]{
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
+    };
     private int row;
     private int col;
+    private int count;
 
     public MainFrame1() {
         initFrame();
@@ -64,24 +72,28 @@ public class MainFrame1 extends JFrame {
                 if (row < data.length - 1) {
                     swap(row, col, row + 1, col);
                     row++;
+                    count++;
                 }
                 break;
             case DOWN:
                 if (row > 0 && row < data.length) {
-                    swap(row,col, row - 1, col);
+                    swap(row, col, row - 1, col);
                     row--;
+                    count++;
                 }
                 break;
             case LEFT:
                 if (col < data.length - 1) {
                     swap(row, col, row, col + 1);
                     col++;
+                    count++;
                 }
                 break;
             case RIGHT:
                 if (col > 0 && col < data.length) {
                     swap(row, col, row, col - 1);
                     col--;
+                    count++;
                 }
                 break;
         }
@@ -111,13 +123,13 @@ public class MainFrame1 extends JFrame {
             number.add(i);
         }
 
-        do{
+        do {
             Collections.shuffle(number);
-        }while(!isSolvable(number));
+        } while (!isSolvable(number));
 
 //        OUT:
-        for (int i = 0,k=0; i < data.length; i++) {
-            for (int j = 0; j < data[i].length; j++,k++) {
+        for (int i = 0, k = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++, k++) {
                 data[i][j] = number.get(k);
                 if (data[i][j] == 0) {
                     row = i;
@@ -130,16 +142,16 @@ public class MainFrame1 extends JFrame {
 
     // 判断拼图是否可解
     private boolean isSolvable(List<Integer> number) {
-        int inversions=0; // 记录逆序数,即列表中某个数前面有多少个比它大的数
-        int blankRow=0;   // 记录空白块所在行
+        int inversions = 0; // 记录逆序数,即列表中某个数前面有多少个比它大的数
+        int blankRow = 0;   // 记录空白块所在行
 
-        for(int i = 0; i < 16; i++) {
-            if(number.get(i)==0){
+        for (int i = 0; i < 16; i++) {
+            if (number.get(i) == 0) {
                 blankRow = i / 4;
                 continue;
             }
-            for(int j = i+1; j < 16; j++) {
-                if(number.get(j)!=0&&number.get(i)>number.get(j)) {
+            for (int j = i + 1; j < 16; j++) {
+                if (number.get(j) != 0 && number.get(i) > number.get(j)) {
                     inversions++;
                 }
             }
@@ -150,6 +162,18 @@ public class MainFrame1 extends JFrame {
     // 初始化拼图
     private void initImage() {
         this.getContentPane().removeAll();
+
+        // 刷新界面时可以显示步数
+        JLabel countTxt = new JLabel("步数:" + count);
+        countTxt.setBounds(20, 20, 100, 20);
+        countTxt.setForeground(Color.white);
+        this.add(countTxt);
+
+        if (isWin()) {
+            JLabel win = new JLabel(new ImageIcon(IMAGE_PATH + "win.png"));
+            win.setBounds(92, 198, 266, 88);
+            this.add(win);
+        }
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
                 JLabel label = new JLabel();
@@ -166,6 +190,17 @@ public class MainFrame1 extends JFrame {
         this.repaint();
     }
 
+    private boolean isWin() {
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j] != windata[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     // 初始化菜单
     private void initMenu() {
         JMenuBar menuBar = new JMenuBar();
@@ -176,6 +211,8 @@ public class MainFrame1 extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 MainFrame1.this.dispose();
                 new MainFrame();
+//                initRandomArray();
+//                initImage();
             }
         });
         JMenuItem exitItem = new JMenuItem("退出游戏");
