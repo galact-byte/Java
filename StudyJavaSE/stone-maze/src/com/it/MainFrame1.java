@@ -174,7 +174,7 @@ public class MainFrame1 extends JFrame {
         restartitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainFrame.this.dispose();
+                MainFrame1.this.dispose();
                 new MainFrame();
             }
         });
@@ -182,7 +182,7 @@ public class MainFrame1 extends JFrame {
         exitItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainFrame.this.dispose();
+                MainFrame1.this.dispose();
             }
         });
         menu.add(restartitem);
