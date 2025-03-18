@@ -77,7 +77,7 @@ public class MainFrame extends JFrame {
                 }
                 break;
             case DOWN:
-                if (row > 0||row< data.length) {
+                if (row > 0 || row < data.length) {
                     int temp = data[row][col];
                     data[row][col] = data[row - 1][col];
                     data[row - 1][col] = temp;
@@ -86,19 +86,19 @@ public class MainFrame extends JFrame {
                 }
                 break;
             case LEFT:
-                if(col< data.length-1){
+                if (col < data.length - 1) {
                     int temp = data[row][col];
-                    data[row][col] = data[row][col+1];
-                    data[row][col+1] = temp;
+                    data[row][col] = data[row][col + 1];
+                    data[row][col + 1] = temp;
                     col++;
                     count++;
                 }
                 break;
             case RIGHT:
-                if(col>0||col< data.length){
+                if (col > 0 || col < data.length) {
                     int temp = data[row][col];
-                    data[row][col] = data[row][col-1];
-                    data[row][col-1] = temp;
+                    data[row][col] = data[row][col - 1];
+                    data[row][col - 1] = temp;
                     col--;
                     count++;
                 }
@@ -135,12 +135,12 @@ public class MainFrame extends JFrame {
         this.getContentPane().removeAll();
 
         // 刷新界面时可以显示步数
-        JLabel countTxt=new JLabel("步数:"+count);
-        countTxt.setBounds(20,20,100,20);
+        JLabel countTxt = new JLabel("步数:" + count);
+        countTxt.setBounds(20, 20, 100, 20);
         countTxt.setForeground(Color.white);
         this.add(countTxt);
 
-        if(isWin()){
+        if (isWin()) {
             JLabel win = new JLabel(new ImageIcon(IMAGE_PATH + "win.png"));
             win.setBounds(92, 198, 266, 88);
             this.add(win);
@@ -182,6 +182,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 //                MainFrame.this.dispose();
 //                new MainFrame();
+                count = 0;
                 initRandomArray();
                 initImage();
             }

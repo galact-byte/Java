@@ -209,6 +209,7 @@ public class MainFrame1 extends JFrame {
         restartitem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                count = 0;
                 MainFrame1.this.dispose();
                 new MainFrame();
 //                initRandomArray();
