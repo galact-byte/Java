@@ -1,13 +1,11 @@
 package com.it.exception1;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Exception {
+public class Exception1 {
     public static void main(String[] args) {
         show();
         try {
