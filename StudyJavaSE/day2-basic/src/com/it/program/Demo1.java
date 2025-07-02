@@ -22,28 +22,28 @@ public class Demo1 {
     // 获取用户输入的年龄
     public static int inputAge() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("请输入年龄：\n");
+        System.out.print("请输入年龄：");
         return sc.nextInt();
     }
 
     // 获取用户输入的性别
     public static String inputSex() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("请输入性别：\n");
+        System.out.print("请输入性别：");
         return sc.next();
     }
 
     // 获取用户输入的体重
     public static double inputWeight() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("请输入体重（kg）：\n");
+        System.out.print("请输入体重（kg）：");
         return sc.nextDouble();
     }
 
     // 获取用户输入的身高
     public static double inputHeight() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("请输入身高（cm）：\n");
+        System.out.print("请输入身高（cm）：");
         return sc.nextDouble();
     }
 
@@ -51,7 +51,7 @@ public class Demo1 {
     public static double BMI(double weight, double height) {
         // height单位是厘米，转换为米后进行计算
         height = height / 100;
-        return weight / (height * height);
+        return Double.parseDouble(String.format("%.2f",weight / (height * height)));
     }
 
     // 计算BMR
