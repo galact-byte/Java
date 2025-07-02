@@ -51,7 +51,8 @@ public class Demo1 {
     public static double BMI(double weight, double height) {
         // height单位是厘米，转换为米后进行计算
         height = height / 100;
-        return Double.parseDouble(String.format("%.2f",weight / (height * height)));
+        Double BMI= weight / (height * height);
+        return Double.parseDouble(String.format("%.2f",BMI));
     }
 
     // 计算BMR
